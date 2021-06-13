@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id="app">
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer>
+        <app-h3></app-h3>
+    </div>
+    
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //Vue.component('컴포넌트이름', 컴포넌트 내용);
+        Vue.component('app-header',{
+            template: '<h1>app-header component (전역) </h1>'
+        });
+        Vue.component('app-content',{
+            template: '<h2>app-content component (전역) </h2>'
+        });
+        //인스턴스를 생성하게되면 기본적으로 Root 컴포넌트가 된다 
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Test1'
+            },
+            components: {
+                //'key' : 'value'
+                //'컴포넌트이름' : 컴포넌트 내용
+                'app-footer': {
+                    template: '<footer> app-footer component (지역)</footer>'
+                },
+                'app-h3': {
+                    template: '<h3> app-h3 component (지역)</h3>'
+                }
+
+
+            }
+
+        });
+    </script>
+</body>
+</html>
