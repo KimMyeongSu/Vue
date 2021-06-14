@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id="app">    
+        <!-- <app-header v-bind:프롭스 속성이름="상위컴포넌트 데이터 이름" ></app-header> -->
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content1 v-bind:propsdata="number"></app-content1>
+        <!-- <app-content2 v-on:하위 컴포넌트에서 발생한 이벤트이름="상위 컴포넌트의 메서드 이름"></app-content2> -->
+        <app-content2 v-on:pass="logText"></app-content2>
+        <app-content3 v-on:add="addNumber"></app-content3>
+        <app-content4 v-on:sub="subNumber"></app-content4>
+    </div>
+    
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    let appHeader = {
+        template: '<h1>{{ propsdata }}</h1>',
+        props: ['propsdata']
+    };
+
+    let appContent1= {
+        template: '<div>{{ propsdata }}</div>',
+        props: ['propsdata']
+    };
+
+    let appContent2= {
+        template: '<button v-on:click="passEvent">click me!</button>',
+        methods:{
+            passEvent: function(){
+                this.$emit('pass');
+            }
+        }
+    };
+
+    let appContent3= {
+        template: '<button v-on:click="add">Add Number</button>',
+        methods:{
+            add: function(){
+                this.$emit('add');
+            }
+        }
+    };
+
+    let appContent4= {
+        template: '<button v-on:click="sub">sub Number</button>',
+        methods:{
+            sub: function(){
+                this.$emit('sub');
+            }
+        }
+    };
+    new Vue({
+        el: '#app',
+        components: {
+            'app-header': appHeader,
+            'app-content1': appContent1,
+            'app-content2': appContent2,
+            'app-content3': appContent3,
+            'app-content4': appContent4
+        },
+        data: {
+            message: 'Root Message',
+            number: 10
+        },
+        methods: {
+            logText: function(){
+                console.log('logText Call');
+            },
+            addNumber: function(){
+                this.number++;
+            },
+            subNumber: function(){
+                this.number--;
+            }
+        }
+    });
+    </script>
+</body>
+</html>
