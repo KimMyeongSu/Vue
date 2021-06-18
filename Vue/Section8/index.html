@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    .text-blue {color:blue}
+    .text-black {color:black}
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <div>{{ str }}</div>
+        <!-- <p v-bind:id= "uuid" v-bind:class="name" v-on:click="clickcolor" >{{ num }}</p> -->
+        <!-- 아래처럼 생략하여 직관적으로 표현 가능 -->
+        <p :id= "uuid" :class="name" @click="clickcolor" >{{ num }}</p>
+        <p>{{ doublenum }}</p>
+        <div v-if="loading">Loading...</div>
+        <div v-else>test user has been logged in</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                str: 'hi',
+                num: 13,
+                uuid: 'Testid',
+                name: 'text-blue',
+                loading: true,
+            },
+            computed: {
+                doublenum: function(){
+                    return this.num * 2
+                }
+            },
+            methods: {
+                clickcolor: function(){
+                    console.log(this.name);
+                    if(this.name ==='text-blue') {
+                        this.name = 'text-black'
+                    }
+                    else if (this.name ==='text-black'){
+                        this.name ='text-blue'
+                    }   
+                },
+            }
+
+        })
+    </script>
+</body>
+</html>
