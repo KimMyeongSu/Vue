@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style tpye="text/css">
+    .warning{color:red}
+    .blue-text{color:blue}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{ num }}</p>
+        <button v-on:click="addNum">AddNum</button>
+        <p v-bind:class="errorTextColor">Hello</p>
+        <p v-bind:class="cname">Hello</p>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                cname: 'blue-text',
+                isError: false
+            },
+            watch: {
+                num: function() {
+                    this.logText();
+                }
+            },
+            methods: {
+                addNum: function(){ 
+                    this.num++;
+                },
+                logText: function(){
+                    console.log('changed');
+                },
+            },
+            computed: {
+                errorTextColor: function(){
+                    return this.isError ? 'warning' : null;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
